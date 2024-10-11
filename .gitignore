@@ -1,0 +1,75 @@
+# Credenciais do Google Cloud
+Quickstart-b81da00f7dbd.json
+# Arquivos de ambiente
+.env
+.venv
+*.env
+
+# Arquivos e diretórios específicos do Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Arquivos e diretórios específicos do IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_StoreS
+
+# Arquivos de log
+*.log
+
+# Arquivos de banco de dados
+*.sqlite3
+*.db
+
+# Arquivos de mídia e estáticos (se gerenciados separadamente)
+media/
+static/
+
+# Arquivos de dependências
+node_modules/
+bower_components/
+
+# Arquivos de compilação
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Arquivos de pacote
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Arquivos específicos mencionados
+google-cloud-sdk-441.0.0-windows-x86_64.zip
+
+# Outros
+*.bak
+*.tmp
+*.temp
