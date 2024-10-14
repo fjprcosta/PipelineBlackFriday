@@ -66,20 +66,19 @@ def baixar_dados_analytics():
         )
         response = client.run_report(request)
 
-        if not response.rows:
-            print("Nenhum dado encontrado no Google Analytics para o período especificado.")
-            return
-
         # Criar listas para armazenar os dados
         data = []
         header = [dim.name for dim in request.dimensions] + [metric.name for metric in request.metrics]
 
-        # Preencher a lista de dados
-        for row in response.rows:
-            row_data = [dim_value.value for dim_value in row.dimension_values] + [metric_value.value for metric_value in row.metric_values]
-            data.append(row_data)
+        if response.rows:
+            # Preencher a lista de dados se houver linhas na resposta
+            for row in response.rows:
+                row_data = [dim_value.value for dim_value in row.dimension_values] + [metric_value.value for metric_value in row.metric_values]
+                data.append(row_data)
+        else:
+            print("Nenhum dado encontrado no Google Analytics para o período especificado.")
 
-        # Criar um DataFrame com os dados
+        # Criar um DataFrame com os dados (mesmo que vazio)
         df = pd.DataFrame(data, columns=header)
 
         # Configuração da conexão com o banco de dados PostgreSQL
@@ -92,9 +91,10 @@ def baixar_dados_analytics():
         # Salvar o DataFrame na tabela 'google_analytics_data' do banco de dados
         df.to_sql(name='google_analytics_data', con=engine, if_exists='replace', index=False)
 
-        print("Dados do Google Analytics salvos no banco de dados PostgreSQL.")
+        print("Tabela do Google Analytics criada/atualizada no banco de dados PostgreSQL.")
+
     except Exception as e:
         print(f"Erro ao baixar e salvar dados do Google Analytics: {str(e)}")
-
+        print(df)      
 if __name__ == "__main__":
     baixar_dados_analytics()
